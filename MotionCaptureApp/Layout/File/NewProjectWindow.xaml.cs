@@ -65,7 +65,7 @@ namespace MotionCaptureApp.Layout.File
         private void WorkerItemInsertBtn_Click(object sender, RoutedEventArgs e)
         {
             workerModelList.Add(new WorkerModel(
-                WorkerNameTxt.Text, Convert.ToByte(WorkerAgeTxt.Text), Convert.ToBoolean(WorkerGenderCmb.SelectedIndex),
+                WorkerNameTxt.Text, Convert.ToInt16(WorkerAgeTxt.Text), Convert.ToInt16(WorkerGenderCmb.SelectedIndex),
                 Convert.ToDouble(WorkerHeightTxt.Text), Convert.ToDouble(WorkerWeightTxt.Text), "TEST"
                 ));
 

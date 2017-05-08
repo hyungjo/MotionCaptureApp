@@ -84,6 +84,7 @@ namespace MotionCaptureApp.Tool.DB
 
                     foreach (ModelInterface query in queryString)
                     {
+                        Console.WriteLine("==========" + query.toInsertQueryString());
                         command.CommandText = query.toInsertQueryString();
                         command.ExecuteNonQuery();
                     }
