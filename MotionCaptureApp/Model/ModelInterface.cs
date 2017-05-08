@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MotionCaptureApp.Model
 {
-    interface ModelInterface
+    public interface ModelInterface
     {
         string toInsertQueryString();
     }

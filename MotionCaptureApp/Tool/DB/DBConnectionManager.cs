@@ -9,17 +9,20 @@ using System.Windows;
 
 namespace MotionCaptureApp.Tool.DB
 {
-    class DBConnection
+    public class DBConnectionManager
     {
+        private string dbName;
         public string DBPath { get; set; }
-        public string DBName { get; set; }
+        public string DBName { get { return dbName + ".db"; } set { dbName = value; } }
 
         public SQLiteConnection conn;
 
-        public DBConnection(string dbName = "db")
+        public DBConnectionManager(string dbPath, string dbName = "db")
         {
-            DBPath = ((App)Application.Current).CurrentPath;
-            DBName = dbName + ".db";
+            DBPath = dbPath;
+            DBName = dbName;
+
+            executeInitTable();
         }
 
         public void connection()
@@ -41,23 +44,25 @@ namespace MotionCaptureApp.Tool.DB
             using (SQLiteCommand command = new SQLiteCommand(conn))
             {
                 ///Process Table
-                ///Field{ INTEGER id; STRING name; STRING explanation}
-                string processModelTableCreateQuery = "CREATE TABLE ProcessModel {" +
+                ///Field{ INTEGER id; TEXT name; TEXT explanation }
+                string processModelTableCreateQuery = "CREATE TABLE ProcessModel (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "name TEXT," +
                     "explanation TEXT" +
-                    "}";
+                    ")";
                 command.CommandText = processModelTableCreateQuery;
                 command.ExecuteNonQuery();
 
-                string workerModelTableCreateQuery = "CREATE TABLE WorkerModel {" +
+                ///Worker Table
+                ///Field{ INTEGER id, TEXT name, INTEGER age, INTEGER gender, REAL height, REAL weight }
+                string workerModelTableCreateQuery = "CREATE TABLE WorkerModel (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "name TEXT," +
                     "age INTEGER," +
                     "gender INTEGER," +
                     "height REAL," +
                     "weight REAL" +
-                    "}";
+                    ")";
                 command.CommandText = workerModelTableCreateQuery;
                 command.ExecuteNonQuery();
             }
@@ -69,11 +74,11 @@ namespace MotionCaptureApp.Tool.DB
         {
             connection();
 
-            using (SQLiteTransaction tr = conn.BeginTransaction())
+            using (SQLiteTransaction transaction = conn.BeginTransaction())
             {
                 using (SQLiteCommand command = conn.CreateCommand())
                 {
-                    command.Transaction = tr;
+                    command.Transaction = transaction;
 
                     foreach (ModelInterface query in queryString)
                     {
@@ -81,7 +86,7 @@ namespace MotionCaptureApp.Tool.DB
                         command.ExecuteNonQuery();
                     }
                 }
-                tr.Commit();
+                transaction.Commit();
             }
                
             disconnection();

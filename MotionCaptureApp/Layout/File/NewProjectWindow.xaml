@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MotionCaptureApp.Layout.File"
         mc:Ignorable="d"
-        Title="NewProjectWindow" Height="310.673" Width="400">
+        Title="NewProjectWindow" Height="380" Width="640">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -13,14 +13,17 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" MinHeight="144" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" MinHeight="80" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" MinHeight="80" />
             <RowDefinition Height="auto" MinHeight="9" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="111*" />
-            <ColumnDefinition Width="187*" />
-            <ColumnDefinition Width="77*" />
+            <ColumnDefinition Width="115*" />
+            <ColumnDefinition Width="260*" />
+            <ColumnDefinition Width="100*" />
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
@@ -28,30 +31,66 @@
         <Separator Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" />
         <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3"
                    Text="프로젝트 이름"   />
-        <TextBox Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"  />
+        <TextBox x:Name="ProjectNameTxt" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" TextChanged="ProjectNameTxt_TextChanged"  />
         <TextBlock Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3"
                    Text="프로젝트 위치"   />
-        <TextBox Grid.Column="1" Grid.Row="3"  />
-        <Button Grid.Column="2" Grid.Row="3" 
-                Content="경로 선택" />
+        <TextBox x:Name="ProjectLocationTxt" Grid.Column="1" Grid.Row="3"  />
+        <Button x:Name="ProjectLocationSelectBtn" Grid.Column="2" Grid.Row="3" 
+                Content="경로 선택" HorizontalAlignment="Left" Width="129" Click="ProjectLocationSelectBtn_Click" />
         <TextBlock Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3"
                    Text="공정 / 실험자 정보"   />
-        <DataGrid  Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2"
-            AutoGenerateColumns="False">
+        <DockPanel Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="3"
+            LastChildFill="True">
+            <TextBlock DockPanel.Dock="Left" Text="공정 명"/>
+            <TextBox x:Name="ProcessNameTxt" DockPanel.Dock="Left" Width="125" />
+            <TextBlock DockPanel.Dock="Left" Text="설명"/>
+            <TextBox x:Name="ProcessExplanationTxt" DockPanel.Dock="Left" Width="315"/>
+            <Button x:Name="ProcessItemInsertBtn" DockPanel.Dock="Left" Width="50" Content="추가" Click="ProcessItemInsertBtn_Click"/>
+            <Button x:Name="ProcessItemDeleteBtn" DockPanel.Dock="Left" Width="50" Content="삭제"/>
+        </DockPanel>
+        <DataGrid x:Name="ProcessDg"  Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3"
+            AutoGenerateColumns="false" Height="80">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="공정" />
-                <DataGridTextColumn Header="작업자" />
-                <DataGridTextColumn Header="체중" />
-                <DataGridTextColumn Header="신장" />
-                <DataGridTextColumn Header="성별" />
-                <DataGridTextColumn Header="나이" />
+                <DataGridTextColumn Width="4*" Header="공정" Binding="{Binding Path=Name}"/>
+                <DataGridTextColumn Width="6*" Header="설명" Binding="{Binding Path=Explanation}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Separator Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3" />
-        <StackPanel Grid.Column="2" Grid.Row="7"
+        <DockPanel Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="3"
+            LastChildFill="True">
+            <TextBlock DockPanel.Dock="Left" Text="공정 명"/>
+            <TextBox x:Name="WorkerProcessNameTxt" DockPanel.Dock="Left" Width="100" />
+            <TextBlock DockPanel.Dock="Left" Text="이름"/>
+            <TextBox x:Name="WorkerNameTxt" DockPanel.Dock="Left" Width="60"/>
+            <TextBlock DockPanel.Dock="Left" Text="나이"/>
+            <TextBox x:Name="WorkerAgeTxt" DockPanel.Dock="Left" Width="40"/>
+            <TextBlock DockPanel.Dock="Left" Text="성별"/>
+            <ComboBox x:Name="WorkerGenderCmb" DockPanel.Dock="Left" Width="50" SelectedIndex="0">
+                <ComboBoxItem >남성</ComboBoxItem>
+                <ComboBoxItem>여성</ComboBoxItem>
+            </ComboBox>
+            <TextBlock DockPanel.Dock="Left" Text="체중"/>
+            <TextBox x:Name="WorkerWeightTxt" DockPanel.Dock="Left" Width="50"/>
+            <TextBlock DockPanel.Dock="Left" Text="신장"/>
+            <TextBox x:Name="WorkerHeightTxt" DockPanel.Dock="Left" Width="50"/>
+            <Button x:Name="WorkerItemInsertBtn" DockPanel.Dock="Left" Width="50" Content="추가" Click="WorkerItemInsertBtn_Click"/>
+            <Button x:Name="WorkerItemDeleteBtn" DockPanel.Dock="Left" Width="50" Content="삭제"/>
+        </DockPanel>
+        <DataGrid x:Name="WorkerDg"  Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="3"
+              AutoGenerateColumns="False" Height="80">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="공정" Binding="{Binding Path=ProcessGrouop}"/>
+                <DataGridTextColumn Width="*" Header="작업자" Binding="{Binding Path=Name}"/>
+                <DataGridTextColumn Width="*" Header="체중" Binding="{Binding Path=Weight}"/>
+                <DataGridTextColumn Width="*" Header="신장" Binding="{Binding Path=Height}"/>
+                <DataGridTextColumn Width="*" Header="성별" Binding="{Binding Path=Gender}"/>
+                <DataGridTextColumn Width="*" Header="나이" Binding="{Binding Path=Age}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Separator Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="3" />
+        <StackPanel Grid.Column="2" Grid.Row="10"
                     Orientation="Horizontal" FlowDirection="RightToLeft">
             <Button x:Name="CancelBtn" Content="취소" Margin="5,5,0,5" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Click="CancelBtn_Click" />
-            <Button x:Name="OKBtn" Content="확인" Margin="5" HorizontalAlignment="Right" HorizontalContentAlignment="Center" />
+            <Button x:Name="OKBtn" Content="확인" Margin="5" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Click="OKBtn_Click" />
         </StackPanel>
     </Grid>
 </Window>

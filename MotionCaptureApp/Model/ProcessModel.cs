@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace MotionCaptureApp.Model
 {
-    class ProcessModel : ModelInterface
+    public class ProcessModel : ModelInterface
     {
         public string Name { get; set; }
         public string Explanation { get; set; }
@@ -22,7 +22,7 @@ namespace MotionCaptureApp.Model
         public string toInsertQueryString()
         {
             return string.Format("INSERT INTO ProcessModel (name, explanation) " +
-                "VALUES ({0}, {1})", Name, Explanation);
+                "VALUES ('{0}', '{1}')", Name, Explanation);
         }
 
     }

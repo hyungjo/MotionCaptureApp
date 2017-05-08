@@ -6,21 +6,23 @@ using System.Threading.Tasks;
 
 namespace MotionCaptureApp.Model
 {
-    class WorkerModel : ModelInterface
+    public class WorkerModel : ModelInterface
     {
         public string Name { get; set; }
         public byte Age { get; set; }
         public bool Gender { get; set; }
-        public float Height { get; set; }
-        public float Weight { get; set; }
+        public double Height { get; set; }
+        public double Weight { get; set; }
+        public string ProcessGrouop { get; set; }
 
-        public WorkerModel(string name, byte age, bool gender, float height, float weight)
+        public WorkerModel(string name, byte age, bool gender, double height, double weight, string processGroup)
         {
             Name = name;
             Age = age;
             Gender = gender;
             Height = height;
             Weight = weight;
+            ProcessGrouop = processGroup;
         }
 
         public string toInsertQueryString()

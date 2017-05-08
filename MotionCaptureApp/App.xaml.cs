@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MotionCaptureApp.Tool.DB;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,11 +14,11 @@ namespace MotionCaptureApp
     /// </summary>
     public partial class App : Application
     {
-        public string CurrentPath { get; set; }
-
+        public DBConnectionManager dbc;
+        public DBConnectionManager DBConnection { get { return dbc; } }
         public App()
         {
-            CurrentPath = Environment.CurrentDirectory;
+            dbc = new DBConnectionManager(Environment.CurrentDirectory);
         }
     }
 }
