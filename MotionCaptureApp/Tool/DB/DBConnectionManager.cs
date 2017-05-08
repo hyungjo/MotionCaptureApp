@@ -27,6 +27,8 @@ namespace MotionCaptureApp.Tool.DB
 
         public void connection()
         {
+            ///TODO
+            ///DB 파일 생성 예외 처리 구현
             conn = new SQLiteConnection("Data Source=" + DBPath + "\\" + DBName);
             conn.Open();
         }

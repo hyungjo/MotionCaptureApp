@@ -28,7 +28,7 @@ namespace MotionCaptureApp.Model
         public string toInsertQueryString()
         {
             return string.Format("INSERT INTO ProcessModel (name, age, gender, height, weight) " +
-                "VALUES ({0}, {1}, {2}, {3}, {4})", Name, Age, Gender, Height, Weight);
+                "VALUES ({'0'}, {1}, {2}, {3}, {'4'})", Name, Age, Gender, Height, Weight);
         }
     }
 }

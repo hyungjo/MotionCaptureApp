@@ -33,11 +33,6 @@ namespace MotionCaptureApp.Layout.File
             workerModelList = new List<WorkerModel>();
         }
 
-        private void CancelBtn_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
         private void ProjectLocationSelectBtn_Click(object sender, RoutedEventArgs e)
         {
             CommonOpenFileDialog dialog = new CommonOpenFileDialog();
@@ -81,13 +76,23 @@ namespace MotionCaptureApp.Layout.File
             WorkerAgeTxt.Text = string.Empty;
             WorkerHeightTxt.Text = string.Empty;
             WorkerWeightTxt.Text = string.Empty;
-            
         }
 
         private void OKBtn_Click(object sender, RoutedEventArgs e)
         {
             (Application.Current as App).DBConnection.executeInsertQuery(processModelList.ToList<ModelInterface>());
             (Application.Current as App).DBConnection.executeInsertQuery(workerModelList.ToList<ModelInterface>());
+
+            this.Close();
         }
+
+        private void CancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        ///TODO
+        ///Control Validation 구현
+        ///참고: http://stackoverflow.com/questions/19539492/wpf-textbox-validation-c-sharp
     }
 }
