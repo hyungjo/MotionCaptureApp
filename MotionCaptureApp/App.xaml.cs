@@ -13,5 +13,11 @@ namespace MotionCaptureApp
     /// </summary>
     public partial class App : Application
     {
+        public string CurrentPath { get; set; }
+
+        public App()
+        {
+            CurrentPath = Environment.CurrentDirectory;
+        }
     }
 }
