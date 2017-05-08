@@ -1,5 +1,4 @@
-﻿using MotionCaptureApp.Layout.File;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,26 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MotionCaptureApp
+namespace MotionCaptureApp.Layout.File
 {
     /// <summary>
-    /// MainWindow.xaml에 대한 상호 작용 논리
+    /// NewProjectWindow.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class NewProjectWindow : Window
     {
-        public MainWindow()
+        public NewProjectWindow()
         {
             InitializeComponent();
         }
 
-        private void openNewProjectWindow(object sender, RoutedEventArgs e)
+        private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
-            NewProjectWindow npw = new NewProjectWindow();
-            npw.Owner = this;
-            npw.Show();
+            this.Close();
         }
     }
 }

@@ -20,7 +20,7 @@
     
         <Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">
             <MenuItem Header="파일">
-                <MenuItem Header="새 프로젝트"/>
+                <MenuItem Header="새 프로젝트" Click="openNewProjectWindow"/>
                 <Separator />
                 <MenuItem Header="종료"/>
             </MenuItem>
