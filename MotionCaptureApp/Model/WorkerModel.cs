@@ -32,3 +32,4 @@ namespace MotionCaptureApp.Model
         }
     }
 }
+///깃 테스트
