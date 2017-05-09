@@ -91,6 +91,26 @@ namespace MotionCaptureApp.Layout.File
             this.Close();
         }
 
+        private void ProcessItemDeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProcessDg.SelectedIndex >= 0)
+            {
+                ProcessModel processItem = ProcessDg.SelectedItem as ProcessModel;
+                processModelList.Remove(processItem);
+                ProcessDg.Items.Refresh();
+            }
+        }
+
+        private void WorkerItemDeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (WorkerDg.SelectedIndex >= 0)
+            {
+                WorkerModel workerItem = WorkerDg.SelectedItem as WorkerModel;
+                workerModelList.Remove(workerItem);
+                WorkerDg.Items.Refresh();
+            }
+        }
+
         ///TODO
         ///Control Validation 구현
         ///참고: http://stackoverflow.com/questions/19539492/wpf-textbox-validation-c-sharp

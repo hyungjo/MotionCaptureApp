@@ -47,7 +47,7 @@ namespace MotionCaptureApp.Tool.DB
             {
                 ///Process Table
                 ///Field{ INTEGER id; TEXT name; TEXT explanation }
-                string processModelTableCreateQuery = "CREATE TABLE ProcessModel (" +
+                string processModelTableCreateQuery = "CREATE TABLE IF NOT EXISTS ProcessModel (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "name TEXT," +
                     "explanation TEXT" +
@@ -57,7 +57,7 @@ namespace MotionCaptureApp.Tool.DB
 
                 ///Worker Table
                 ///Field{ INTEGER id, TEXT name, INTEGER age, INTEGER gender, REAL height, REAL weight }
-                string workerModelTableCreateQuery = "CREATE TABLE WorkerModel (" +
+                string workerModelTableCreateQuery = "CREATE TABLE IF NOT EXISTS WorkerModel (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "name TEXT," +
                     "age INTEGER," +

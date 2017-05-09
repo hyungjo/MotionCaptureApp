@@ -46,7 +46,7 @@
             <TextBlock DockPanel.Dock="Left" Text="설명"/>
             <TextBox x:Name="ProcessExplanationTxt" DockPanel.Dock="Left" Width="315"/>
             <Button x:Name="ProcessItemInsertBtn" DockPanel.Dock="Left" Width="50" Content="추가" Click="ProcessItemInsertBtn_Click"/>
-            <Button x:Name="ProcessItemDeleteBtn" DockPanel.Dock="Left" Width="50" Content="삭제"/>
+            <Button x:Name="ProcessItemDeleteBtn" DockPanel.Dock="Left" Width="50" Content="삭제" Click="ProcessItemDeleteBtn_Click"/>
         </DockPanel>
         <DataGrid x:Name="ProcessDg"  Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3"
             AutoGenerateColumns="false" Height="80">
@@ -73,7 +73,7 @@
             <TextBlock DockPanel.Dock="Left" Text="신장"/>
             <TextBox x:Name="WorkerHeightTxt" DockPanel.Dock="Left" Width="50"/>
             <Button x:Name="WorkerItemInsertBtn" DockPanel.Dock="Left" Width="50" Content="추가" Click="WorkerItemInsertBtn_Click"/>
-            <Button x:Name="WorkerItemDeleteBtn" DockPanel.Dock="Left" Width="50" Content="삭제"/>
+            <Button x:Name="WorkerItemDeleteBtn" DockPanel.Dock="Left" Width="50" Content="삭제" Click="WorkerItemDeleteBtn_Click"/>
         </DockPanel>
         <DataGrid x:Name="WorkerDg"  Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="3"
               AutoGenerateColumns="False" Height="80">
