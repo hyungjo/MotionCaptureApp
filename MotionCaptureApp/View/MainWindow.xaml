@@ -24,6 +24,9 @@
                 <Separator />
                 <MenuItem Header="종료"/>
             </MenuItem>
+            <MenuItem Header="설정">
+                <MenuItem Header="센서 설정" Click="openSensorSettingWindow"/>
+            </MenuItem>
         </Menu>
         <TreeView Grid.Column="0" Grid.Row="1">
             <TreeViewItem Header="Level 1" IsExpanded="True">

@@ -1,4 +1,4 @@
-﻿using MotionCaptureApp.Model;
+﻿using MotionCaptureApp.Model.Project;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;

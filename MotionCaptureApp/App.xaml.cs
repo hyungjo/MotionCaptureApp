@@ -1,5 +1,7 @@
-﻿using MotionCaptureApp.Tool.DB;
+﻿using MotionCaptureApp.Model.Sensor;
+using MotionCaptureApp.Tool.DB;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -14,11 +16,12 @@ namespace MotionCaptureApp
     /// </summary>
     public partial class App : Application
     {
-        public DBConnectionManager dbc;
-        public DBConnectionManager DBConnection { get { return dbc; } }
+        public DBConnectionManager DBConnection { get; set; }
+
         public App()
         {
-            dbc = new DBConnectionManager(Environment.CurrentDirectory);
+            DBConnection = new DBConnectionManager(Environment.CurrentDirectory);
+            
         }
     }
 }

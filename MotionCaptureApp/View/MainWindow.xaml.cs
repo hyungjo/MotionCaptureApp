@@ -1,4 +1,5 @@
-﻿using MotionCaptureApp.Layout.File;
+﻿using MotionCaptureApp.View.File;
+using MotionCaptureApp.View.Setting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,13 @@ namespace MotionCaptureApp
             NewProjectWindow npw = new NewProjectWindow();
             npw.Owner = this;
             npw.Show();
+        }
+
+        private void openSensorSettingWindow(object sender, RoutedEventArgs e)
+        {
+            SensorSettingWindow ssw = new SensorSettingWindow();
+            ssw.Owner = this;
+            ssw.Show();
         }
     }
 }

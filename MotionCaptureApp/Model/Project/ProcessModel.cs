@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace MotionCaptureApp.Model
+namespace MotionCaptureApp.Model.Project
 {
     public class ProcessModel : ModelInterface
     {

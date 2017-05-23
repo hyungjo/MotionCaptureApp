@@ -81,13 +81,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\ModelInterface.cs" />
+    <Compile Include="ViewModel\Setting\SensorSettingWindowsViewModel.cs" />
+    <Compile Include="Model\Project\ModelInterface.cs" />
+    <Compile Include="Model\Sensor\SensorData.cs" />
     <Compile Include="Tool\DB\DBConnectionManager.cs" />
-    <Page Include="Layout\File\NewProjectWindow.xaml">
+    <Compile Include="Tool\Sensor\SensorConnectionManager.cs" />
+    <Compile Include="View\Setting\SensorSettingWindow.xaml.cs">
+      <DependentUpon>SensorSettingWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\File\NewProjectWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Layout\MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -95,17 +101,21 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Layout\File\NewProjectWindow.xaml.cs">
+    <Compile Include="View\File\NewProjectWindow.xaml.cs">
       <DependentUpon>NewProjectWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Layout\MainWindow.xaml.cs">
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Setting\SensorSettingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\ProcessModel.cs" />
-    <Compile Include="Model\WorkerModel.cs" />
+    <Compile Include="Model\Project\ProcessModel.cs" />
+    <Compile Include="Model\Project\WorkerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -132,6 +142,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Image\sensorSetting_HumanImage.jpg" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.105.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.105.0\build\net451\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

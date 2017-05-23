@@ -1,4 +1,4 @@
-﻿using MotionCaptureApp.Model;
+﻿using MotionCaptureApp.Model.Project;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace MotionCaptureApp.Layout.File
+namespace MotionCaptureApp.View.File
 {
     /// <summary>
     /// NewProjectWindow.xaml에 대한 상호 작용 논리
