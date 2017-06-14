@@ -26,6 +26,7 @@
             </MenuItem>
             <MenuItem Header="설정">
                 <MenuItem Header="센서 설정" Click="openSensorSettingWindow"/>
+                <MenuItem Header="카메라 설정" Click="openCameraSettingWindow"/>
             </MenuItem>
         </Menu>
         <TreeView Grid.Column="0" Grid.Row="1">

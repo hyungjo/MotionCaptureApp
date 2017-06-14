@@ -15,14 +15,17 @@ using System.Windows.Shapes;
 namespace MotionCaptureApp.View.Setting
 {
     /// <summary>
-    /// SensorSettingWindow.xaml에 대한 상호 작용 논리
+    /// CameraSettingWindow.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class SensorSettingWindow : Window
+    public partial class CameraSettingWindow : Window
     {
-        public SensorSettingWindow()
+        public CameraSettingWindow()
         {
             InitializeComponent();
-            this.DataContext = new ViewModel.Setting.SensorSettingWindowViewModel();
+            this.DataContext = new ViewModel.Setting.CameraSettingWindowViewModel();
         }
     }
 }
+
+
+

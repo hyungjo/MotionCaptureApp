@@ -52,7 +52,7 @@
             <Label Width="100" Grid.Column="4" Grid.Row="1" 
                    Content="{Binding SensorData0.H}"/>
             <Label Width="100" Grid.Column="5" Grid.Row="1" 
-                   Content="{Binding SensorData0.Battery}"/>
+                   Content="{Binding SensorData0.Battery}" Background="{Binding SensorData0.BatteryStatusColor}"/>
         </Grid>
         <StackPanel Grid.Column="1" Grid.Row="2"
                     Orientation="Horizontal" FlowDirection="RightToLeft">

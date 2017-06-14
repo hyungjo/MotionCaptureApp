@@ -2,6 +2,7 @@
 using MotionCaptureApp.ViewModel.Setting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -15,25 +16,32 @@ namespace MotionCaptureApp.Tool.Sensor
     {
         private SerialPort sp;
         private volatile bool stopGetDataFlag = true;
-        private SensorSettingWindowsViewModel sensor;
+        private SensorSettingWindowViewModel sensor;
 
-        public SensorConnectionManager(SensorSettingWindowsViewModel sensor)
+        public SensorConnectionManager(SensorSettingWindowViewModel sensor)
         {
             this.sensor = sensor;
 
             sp = new SerialPort();
-            sp.PortName = "COM3";
+            sp.PortName = "COM5";
             sp.BaudRate = 921600;
             sp.DataBits = 8;
             sp.Parity = Parity.None;
             sp.StopBits = StopBits.One;
-
-            MessageBox.Show("connected");
+            
         }
 
         public void connection()
         {
-            sp.Open();
+            try
+            {
+                sp.Open();
+            }
+            catch (IOException)
+            {
+                MessageBox.Show("센서 포트를 확인해주세요.");
+            }
+            
         }
 
         public void disconnection()

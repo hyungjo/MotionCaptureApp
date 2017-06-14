@@ -40,5 +40,12 @@ namespace MotionCaptureApp
             ssw.Owner = this;
             ssw.Show();
         }
+
+        private void openCameraSettingWindow(object sender, RoutedEventArgs e)
+        {
+            CameraSettingWindow csw = new CameraSettingWindow();
+            csw.Owner = this;
+            csw.Show();
+        }
     }
 }
