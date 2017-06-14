@@ -22,8 +22,8 @@
         </Border>
         <StackPanel Grid.Row="2"
             Orientation="Horizontal" Margin="10">
-            <Button Content="시작" Command="{Binding StartRecordingCommand}"/>
-            <Button Content="종료" Command="{Binding StopRecordingCommand}"/>
+            <Button Content="녹화 시작" Command="{Binding StartRecordingCommand}"/>
+            <Button Content="녹화 종료" Command="{Binding StopRecordingCommand}"/>
         </StackPanel>
     </Grid>
 </Window>

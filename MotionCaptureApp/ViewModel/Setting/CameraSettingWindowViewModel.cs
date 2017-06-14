@@ -23,24 +23,16 @@ namespace MotionCaptureApp.ViewModel.Setting
     class CameraSettingWindowViewModel : ObservableObject, IDisposable
     {
         public ObservableCollection<FilterInfo> VideoDevices { get; set; }
-        private IVideoSource _videoSource;
-        private VideoFileWriter _writer;
-        private bool _recording;
-        private DateTime? _firstFrameTime;
+        private IVideoSource videoSource;
+        private VideoFileWriter videoFileWriter;
+        private bool isRecording;
+        private DateTime? firstFrameTime;
 
         private BitmapImage _image;
-        public BitmapImage Image
-        {
-            get { return _image; }
-            set { Set(ref _image, value); }
-        }
+        public BitmapImage Image { get { return _image; } set { Set(ref _image, value); } }
 
         private FilterInfo _currentDevice;
-        public FilterInfo CurrentDevice
-        {
-            get { return _currentDevice; }
-            set { Set(ref _currentDevice, value); }
-        }
+        public FilterInfo CurrentDevice { get { return _currentDevice; } set { Set(ref _currentDevice, value); } }
 
         public ICommand StartRecordingCommand { get; private set; }
         public ICommand StopRecordingCommand { get; private set; }
@@ -69,7 +61,7 @@ namespace MotionCaptureApp.ViewModel.Setting
             }
             else
             {
-                // MessageBox.Show("No webcam found");
+                //MessageBox.Show("No webcam found");
             }
         }
 
@@ -80,16 +72,16 @@ namespace MotionCaptureApp.ViewModel.Setting
             {
                 rectangle = Rectangle.Union(rectangle, screen.Bounds);
             }
-            _videoSource = new ScreenCaptureStream(rectangle);
-            _videoSource.NewFrame += video_NewFrame;
-            _videoSource.Start();
+            videoSource = new ScreenCaptureStream(rectangle);
+            videoSource.NewFrame += capturedWebCamNewFrame;
+            videoSource.Start();
 
             /*
             if (CurrentDevice != null)
             {
-                _videoSource = new VideoCaptureDevice(CurrentDevice.MonikerString);
-                _videoSource.NewFrame += video_NewFrame;
-                _videoSource.Start();
+                videoSource = new VideoCaptureDevice(CurrentDevice.MonikerString);
+                videoSource.NewFrame += capturedWebCamNewFrame;
+                videoSource.Start();
             }
             else
             {
@@ -100,18 +92,20 @@ namespace MotionCaptureApp.ViewModel.Setting
 
         private void StopCamera()
         {
-            if (_videoSource != null && _videoSource.IsRunning)
+            if (videoSource != null && videoSource.IsRunning)
             {
-                _videoSource.Stop();
-                _videoSource.NewFrame -= video_NewFrame;
+                videoSource.Stop();
+                videoSource.NewFrame -= capturedWebCamNewFrame;
+                
             }
             Image = null;
+            MessageBox.Show("캡쳐 종료");
         }
 
         private void StartRecording()
         {
             var dialog = new SaveFileDialog();
-            dialog.FileName = "Video1";
+            dialog.FileName = "CapturedVideo";
             dialog.DefaultExt = ".avi";
             dialog.AddExtension = true;
             var dialogresult = dialog.ShowDialog();
@@ -119,56 +113,57 @@ namespace MotionCaptureApp.ViewModel.Setting
             {
                 return;
             }
-            _firstFrameTime = null;
-            _writer = new VideoFileWriter();
-            _writer.Open(dialog.FileName, (int)Math.Round(Image.Width, 0), (int)Math.Round(Image.Height, 0));
-            _recording = true;
+            firstFrameTime = null;
+            videoFileWriter = new VideoFileWriter();
+            videoFileWriter.Open(dialog.FileName, (int)Math.Round(Image.Width, 0), (int)Math.Round(Image.Height, 0));
+            isRecording = true;
         }
 
         private void StopRecording()
         {
-            _recording = false;
-            _writer.Close();
-            _writer.Dispose();
+            isRecording = false;
+            videoFileWriter.Close();
+            videoFileWriter.Dispose();
         }
 
-        private void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        private void capturedWebCamNewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             try
             {
-                if (_recording)
+                if (isRecording)
                 {
-                    if (_firstFrameTime != null)
+                    //TODO
+                    //센서 데이터 수집 시간과 동기화
+                    if (firstFrameTime != null)
                     {
-                        _writer.WriteVideoFrame(eventArgs.Frame, DateTime.Now - _firstFrameTime.Value);
+                        videoFileWriter.WriteVideoFrame(eventArgs.Frame, DateTime.Now - firstFrameTime.Value);
                     }
                     else
                     {
-                        _writer.WriteVideoFrame(eventArgs.Frame);
-                        _firstFrameTime = DateTime.Now;
+                        videoFileWriter.WriteVideoFrame(eventArgs.Frame);
+                        firstFrameTime = DateTime.Now;
                     }
                 }
                 using (var bitmap = (Bitmap)eventArgs.Frame.Clone())
                 {
                     Image = bitmap.ToBitmapImage();
                 }
-                Image.Freeze(); // avoid cross thread operations and prevents leaks
+                Image.Freeze(); // 메모리 누수 방지
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Error on _videoSource_NewFrame:\n" + exc.Message, "Error", MessageBoxButton.OK,
-                    MessageBoxImage.Error);
+                MessageBox.Show(exc.Message);
                 StopCamera();
             }
         }
 
         public void Dispose()
         {
-            if (_videoSource != null && _videoSource.IsRunning)
+            if (videoSource != null && videoSource.IsRunning)
             {
-                _videoSource.Stop();
+                videoSource.Stop();
             }
-            _writer?.Dispose();
+            videoFileWriter?.Dispose();
         }
     }
 }
